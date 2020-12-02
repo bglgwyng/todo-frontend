@@ -5,10 +5,19 @@ import './List.scss';
 import Card from "../Card/Card";
 import Modal from "../../Common/Modal/Modal";
 
+import {useSelector} from "react-redux";
+import {useActions} from '../../lib/useActions';
+import {changeIsModal, changeIsDeleteCard, changeDeleteCardId } from '../../modules/deleteCard'
+
 const List = () => {
-    const [isModal, setIsModal] = useState(false)
-    const [isDeleteCard, setIsDeleteCard] = useState(false)
-    const [deleteCardId, setDeleteCardId] = useState(0)
+    // const [isModal, setIsModal] = useState(false)
+    // const [isDeleteCard, setIsDeleteCard] = useState(false)
+    // const [deleteCardId, setDeleteCardId] = useState(0)
+    const isModal = useSelector(state => state.isModal, []); // 상태조회!
+    const isDeleteCard = useSelector(state => state.isDeleteCard, []); // 상태조회!
+    const deleteCardId = useSelector(state => state.deleteCardId, []); // 상태조회!
+    const [setIsModal, setIsDeleteCard, setDeleteCardId] = useActions([changeIsModal, changeIsDeleteCard, changeDeleteCardId ], []); // 만들어진 액션생성함수 사용하기위해!
+
 
     const [isCardArea, setIsCardArea] = useState(false);
     const [newCardTitle, setNewCardTitle] = useState("");
